@@ -9,9 +9,9 @@ public class DBConnection {
 
     private DBConnection(String nomDB) {
         try {
-            String userName = "miu";
-            String password = "bonbon1a";
-            String serverName = "localhost";
+            String userName = "hydris";
+            String password = "";
+            String serverName = "hydris.n-e-t.name";
             String portNumber = "3306";
             String dbName = "cpoa";
             String urlDB = "jdbc:mariadb://" + serverName + ":";
