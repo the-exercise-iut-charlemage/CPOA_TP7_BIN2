@@ -14,8 +14,9 @@ public class DBConnection {
         String password = "bonbon1a";
         String serverName = "hydris.n-e-t.name";
         String portNumber = "3306";
+        String dbName = nomDB;
         String urlDB = "jdbc:mariadb://" + serverName + ":";
-        urlDB += portNumber + "/" + nomDB;
+        urlDB += portNumber + "/" + dbName;
         this.connection = DriverManager.getConnection(urlDB, userName, password);
     }
 
