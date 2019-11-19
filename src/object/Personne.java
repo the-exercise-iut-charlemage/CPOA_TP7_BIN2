@@ -93,7 +93,30 @@ public class Personne {
     }
 
     public void save() throws SQLException {
+        if (this.id != -1) this.update();
+        else this.saveNew();
+    }
+
+    public void update() throws SQLException {
         Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(
+                "update personne set nom = ?, prenom = ? " +
+                        "where id = ?"
+        );
+        statement.setString(1, this.nom);
+        statement.setString(2, this.prenom);
+        statement.setInt(3, this.id);
+
+    }
+
+    private void saveNew() throws SQLException {
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement statementID = connection.prepareStatement(
+                "select max(id) as idMax from personne"
+        );
+        ResultSet idSet = statementID.executeQuery();
+        while (idSet.next())
+            this.id = idSet.getInt("idMax");
         PreparedStatement statement = connection.prepareStatement(
                 "insert into  personne(id, nom, prenom) values(?, ?, ?)"
         );
