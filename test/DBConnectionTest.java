@@ -34,4 +34,8 @@ public class DBConnectionTest {
         assertNotEquals("Les connection sont idantique", connection1.toString(), connection2.toString());
     }
 
+    @Test
+    public void test_instance() throws SQLException {
+        assertTrue("La connection n'a pas la bon instance", DBConnection.getConnection() instanceof Connection);
+    }
 }
