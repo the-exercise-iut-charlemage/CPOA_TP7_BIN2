@@ -92,6 +92,17 @@ public class Personne {
         return null;
     }
 
+    public void save() throws SQLException {
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(
+                "insert into  personne(id, nom, prenom) values(?, ?, ?)"
+        );
+        statement.setInt(1, this.id);
+        statement.setString(2, this.nom);
+        statement.setString(3, this.prenom);
+        statement.execute();
+    }
+
     public int getId() {
         return id;
     }
