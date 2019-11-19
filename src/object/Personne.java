@@ -116,7 +116,7 @@ public class Personne {
         );
         ResultSet idSet = statementID.executeQuery();
         while (idSet.next())
-            this.id = idSet.getInt("idMax");
+            this.id = idSet.getInt("idMax") + 1;
         PreparedStatement statement = connection.prepareStatement(
                 "insert into  personne(id, nom, prenom) values(?, ?, ?)"
         );
