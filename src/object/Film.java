@@ -109,6 +109,7 @@ public class Film {
         statement.setInt(1, this.id_real);
         statement.setString(2, this.titre);
         statement.setInt(3, this.id);
+        statement.execute();
     }
 
     private void saveNew() throws SQLException {

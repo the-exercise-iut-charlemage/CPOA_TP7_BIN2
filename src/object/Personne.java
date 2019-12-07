@@ -62,10 +62,10 @@ public class Personne {
                 personnes.add(personne);
             }
             return personnes.get(0);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public static ArrayList<Personne> findByName(String nom) {
@@ -100,10 +100,12 @@ public class Personne {
     public void delete() throws SQLException {
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(
-                "drop personne " +
+                "delete from personne " +
                         "where id = ?"
         );
         statement.setInt(1, this.id);
+        statement.execute();
+        this.id = -1;
     }
 
     private void update() throws SQLException {
@@ -115,7 +117,7 @@ public class Personne {
         statement.setString(1, this.nom);
         statement.setString(2, this.prenom);
         statement.setInt(3, this.id);
-
+        statement.execute();
     }
 
     private void saveNew() throws SQLException {
@@ -169,13 +171,9 @@ public class Personne {
     }
 
     public static void deleteTable() throws SQLException {
-        Objects.requireNonNull(findAll()).forEach(e -> {
-            try {
-                e.delete();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        });
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement st = connection.prepareStatement("DROP TABLE IF EXISTS `personne`");
+        st.execute();
     }
 
     @Override
