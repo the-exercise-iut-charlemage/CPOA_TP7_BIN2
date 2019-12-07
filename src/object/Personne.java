@@ -97,7 +97,7 @@ public class Personne {
         else this.saveNew();
     }
 
-    public void update() throws SQLException {
+    private void update() throws SQLException {
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(
                 "update personne set nom = ?, prenom = ? " +
