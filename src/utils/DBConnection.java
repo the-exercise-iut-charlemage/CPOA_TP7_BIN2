@@ -12,7 +12,7 @@ public class DBConnection {
     private DBConnection(String nomDB) throws SQLException {
         String userName = "hydris";
         String password = "bonbon1a";
-        String serverName = "hydris.n-e-t.name";
+        String serverName = "92.138.87.209";
         String portNumber = "3306";
         String dbName = nomDB;
         String urlDB = "jdbc:mariadb://" + serverName + ":";
