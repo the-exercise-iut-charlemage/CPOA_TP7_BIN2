@@ -1,12 +1,11 @@
-import object.Film;
 import object.Personne;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.junit.Assert.*;
 
@@ -38,23 +37,26 @@ public class PersonneTest {
 
     @Test
     public void test_find_all() {
-        List<Personne> l = Personne.findAll();
-        assertEquals("Les listes doivent être les mêmes", l, lb);
+        int i = 0;
+        for (Personne p: Personne.findAll()) {
+            assertEquals("Les listes doivent être les mêmes", p, lb.get(i));
+            i++;
+        }
     }
 
 
     @Test
-    public void test_find_by_id() {
+    public void test_find_by_id() throws SQLException {
         Personne pId = Personne.findById(2);
         assertNotNull("Le retour et null", pId);
-        assertTrue("Le résultat devrait contenir l'id 2", pId.equals(p2));
+        assertTrue("Le résultat devrait contenir l'id 2", pId.getNom().equals(p2.getNom()));
     }
     
     @Test
     public void test_find_by_nom() {
         List<Personne> pNom = Personne.findByName("Kubrick");
         assertNotNull("Le retour et null", pNom);
-        assertTrue("Le résultat devrait contenir Kubrick", pNom.contains(p3));
+        assertTrue("Le résultat devrait contenir Kubrick", pNom.get(0).getNom().equals(p3.getNom()));
     }
 
     @Test

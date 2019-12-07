@@ -60,10 +60,9 @@ public class Film {
                 films.add(film);
             }
             return films.get(0);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            return null;
         }
-        return null;
     }
 
     public static List<Film> findByRealisateur(Personne p) {
@@ -115,7 +114,7 @@ public class Film {
     private void saveNew() throws SQLException {
         Connection connection = DBConnection.getConnection();
         PreparedStatement statementID = connection.prepareStatement(
-                "select max(id) as idMax from personne"
+                "select max(id) as idMax from film"
         );
         ResultSet idSet = statementID.executeQuery();
         while (idSet.next())
@@ -123,9 +122,9 @@ public class Film {
         PreparedStatement statement = connection.prepareStatement(
                 "insert into film(id, titre, id_real) values(?, ?, ?)"
         );
-        statement.setInt(1, this.id_real);
+        statement.setInt(1, this.id);
         statement.setString(2, this.titre);
-        statement.setInt(3, this.id);
+        statement.setInt(3, this.id_real);
         statement.execute();
     }
 
@@ -134,7 +133,7 @@ public class Film {
         PreparedStatement st = connection.prepareStatement("CREATE TABLE `film` (\n" +
                 "  `ID` int(11) NOT NULL,\n" +
                 "  `TITRE` varchar(40) NOT NULL,\n" +
-                "  `ID_REA` int(11) DEFAULT NULL\n" +
+                "  `ID_REAL` int(11) DEFAULT NULL\n" +
                 ")");
         st.executeUpdate();
     }

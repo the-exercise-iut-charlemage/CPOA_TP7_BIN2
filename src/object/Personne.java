@@ -63,7 +63,6 @@ public class Personne {
             }
             return personnes.get(0);
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
