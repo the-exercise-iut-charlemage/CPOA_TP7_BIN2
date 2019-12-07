@@ -1,6 +1,5 @@
 package test;
 
-import activeRecord.Personne;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

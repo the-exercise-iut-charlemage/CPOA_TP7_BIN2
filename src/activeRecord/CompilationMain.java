@@ -1,5 +1,6 @@
 package activeRecord;
 
+import object.Film;
 import object.Personne;
 import utils.RealisateurAbsentException;
 

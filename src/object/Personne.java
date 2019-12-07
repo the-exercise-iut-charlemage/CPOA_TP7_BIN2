@@ -97,6 +97,15 @@ public class Personne {
         else this.saveNew();
     }
 
+    public void delete() throws SQLException {
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement statement = connection.prepareStatement(
+                "drop personne " +
+                        "where id = ?"
+        );
+        statement.setInt(1, this.id);
+    }
+
     private void update() throws SQLException {
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(

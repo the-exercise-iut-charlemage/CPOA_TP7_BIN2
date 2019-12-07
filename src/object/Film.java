@@ -11,25 +11,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Flim {
+public class Film {
 
     private String titre;
     private int id;
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getId_real() {
+        return id_real;
+    }
+
     private int id_real;
 
-    public Flim(String titre, Personne real) {
+    public Film(String titre, Personne real) {
         this.titre = titre;
         this.id_real = real.getId();
         this.id = -1;
     }
 
-    private Flim(String titre, int id, int id_real) {
+    private Film(String titre, int id, int id_real) {
         this.titre = titre;
         this.id = id;
         this.id_real = id_real;
     }
 
-    public static List<Flim> findById(int id) {
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    public static Film findById(int id) {
         try {
             Connection connection = DBConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
@@ -37,23 +54,23 @@ public class Flim {
             );
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-            List<Flim> flims = new ArrayList<>();
+            List<Film> films = new ArrayList<>();
             while (resultSet.next()) {
-                Flim flim = new Flim(
+                Film film = new Film(
                         resultSet.getString("titre"),
                         resultSet.getInt("id"),
                         resultSet.getInt("id_real")
                 );
-                flims.add(flim);
+                films.add(film);
             }
-            return flims;
+            return films.get(0);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static List<Flim> findByRealisateur(Personne p) {
+    public static List<Film> findByRealisateur(Personne p) {
         try {
             Connection connection = DBConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
@@ -61,16 +78,16 @@ public class Flim {
             );
             statement.setInt(1, p.getId());
             ResultSet resultSet = statement.executeQuery();
-            List<Flim> flims = new ArrayList<>();
+            List<Film> films = new ArrayList<>();
             while (resultSet.next()) {
-                Flim flim = new Flim(
+                Film film = new Film(
                         resultSet.getString("titre"),
                         resultSet.getInt("id"),
                         resultSet.getInt("id_real")
                 );
-                flims.add(flim);
+                films.add(film);
             }
-            return flims;
+            return films;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,7 +95,7 @@ public class Flim {
     }
 
     public Personne getRealisateur() {
-        return Objects.requireNonNull(Personne.findById(this.id_real)).get(0);
+        return Objects.requireNonNull(Personne.findById(this.id_real));
     }
 
     public void save() throws SQLException, RealisateurAbsentException {
@@ -113,5 +130,13 @@ public class Flim {
         statement.setString(2, this.titre);
         statement.setInt(3, this.id);
         statement.execute();
+    }
+
+    public static void deleteTable() {
+
+    }
+
+    public static void createTable() {
+
     }
 }
