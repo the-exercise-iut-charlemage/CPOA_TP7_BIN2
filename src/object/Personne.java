@@ -161,16 +161,16 @@ public class Personne {
 
     public static void createTable() throws SQLException {
         Connection connection = DBConnection.getConnection();
-        PreparedStatement st = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `testpersonne` (\n" +
-                "`ID` int(11) NOT NULL,\n" +
-                "`NOM` varchar(40) NOT NULL,\n" +
-                "`PRENOM` varchar(40) NOT NULL");
+        PreparedStatement st = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `personne` (" +
+                "`ID` int(11) NOT NULL," +
+                "`NOM` varchar(40) NOT NULL," +
+                "`PRENOM` varchar(40) NOT NULL)");
         st.executeUpdate();
     }
 
     public static void deleteTable() throws SQLException {
         Connection connection = DBConnection.getConnection();
-        PreparedStatement st = connection.prepareStatement("DROP TABLE IF EXISTS `testpersonne`");
+        PreparedStatement st = connection.prepareStatement("DROP TABLE IF EXISTS `personne`");
     }
 
     @Override
