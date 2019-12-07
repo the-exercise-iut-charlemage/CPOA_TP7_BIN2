@@ -21,14 +21,14 @@ public class Personne {
         this.id = -1;
     }
 
-    public static List<Personne> findAll() {
+    public static ArrayList<Personne> findAll() {
         try {
             Connection connection = DBConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
                     "select * from personne"
             );
             ResultSet resultSet = statement.executeQuery();
-            List<Personne> personnes = new ArrayList<>();
+            ArrayList<Personne> personnes = new ArrayList<>();
             while (resultSet.next()) {
                 Personne personne = new Personne(
                         resultSet.getString("nom"),
@@ -44,7 +44,7 @@ public class Personne {
         return null;
     }
 
-    public static List<Personne> findById(int id) {
+    public static Personne findById(int id) {
         try {
             Connection connection = DBConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
@@ -52,7 +52,7 @@ public class Personne {
             );
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-            List<Personne> personnes = new ArrayList<>();
+            ArrayList<Personne> personnes = new ArrayList<>();
             while (resultSet.next()) {
                 Personne personne = new Personne(
                         resultSet.getString("nom"),
@@ -61,14 +61,14 @@ public class Personne {
                 personne.setId(resultSet.getInt("id"));
                 personnes.add(personne);
             }
-            return personnes;
+            return personnes.get(0);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static List<Personne> findByNom(String nom) {
+    public static ArrayList<Personne> findByName(String nom) {
         try {
             Connection connection = DBConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
@@ -76,7 +76,7 @@ public class Personne {
             );
             statement.setString(1, nom);
             ResultSet resultSet = statement.executeQuery();
-            List<Personne> personnes = new ArrayList<>();
+            ArrayList<Personne> personnes = new ArrayList<>();
             while (resultSet.next()) {
                 Personne personne = new Personne(
                         resultSet.getString("nom"),
