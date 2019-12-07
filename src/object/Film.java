@@ -24,10 +24,6 @@ public class Film {
         return id;
     }
 
-    public int getId_real() {
-        return id_real;
-    }
-
     private int id_real;
 
     public Film(String titre, Personne real) {
@@ -132,11 +128,19 @@ public class Film {
         statement.execute();
     }
 
-    public static void deleteTable() {
-
+    public static void createTable() throws SQLException {
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement st = connection.prepareStatement("CREATE TABLE `film` (\n" +
+                "  `ID` int(11) NOT NULL,\n" +
+                "  `TITRE` varchar(40) NOT NULL,\n" +
+                "  `ID_REA` int(11) DEFAULT NULL\n" +
+                ")");
+        st.executeUpdate();
     }
 
-    public static void createTable() {
-
+    public static void deleteTable() throws SQLException {
+        Connection connection = DBConnection.getConnection();
+        PreparedStatement st = connection.prepareStatement("DROP TABLE IF EXISTS `film`");
+        st.execute();
     }
 }

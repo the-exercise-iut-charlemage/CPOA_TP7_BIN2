@@ -171,6 +171,7 @@ public class Personne {
     public static void deleteTable() throws SQLException {
         Connection connection = DBConnection.getConnection();
         PreparedStatement st = connection.prepareStatement("DROP TABLE IF EXISTS `personne`");
+        st.execute();
     }
 
     @Override
