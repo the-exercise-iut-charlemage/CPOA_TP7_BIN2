@@ -26,7 +26,7 @@ public class DBConnection {
 
     public synchronized static Connection getConnection() throws SQLException {
         if (dbConnection == null) {
-            setNomDB("testpersone"); // default
+            setNomDB("cpoa"); // default
         }
         return dbConnection.connection;
     }

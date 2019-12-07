@@ -161,6 +161,7 @@ public class Personne {
     }
 
     public static void createTable() throws SQLException {
+        DBConnection.setNomDB("testpersone");
         Connection connection = DBConnection.getConnection();
         PreparedStatement st = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `personne` (" +
                 "`ID` int(11) NOT NULL," +
