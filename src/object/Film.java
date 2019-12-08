@@ -55,7 +55,7 @@ public class Film {
                 Film film = new Film(
                         resultSet.getString("titre"),
                         resultSet.getInt("id"),
-                        resultSet.getInt("id_real")
+                        resultSet.getInt("id_rea")
                 );
                 films.add(film);
             }
@@ -78,7 +78,7 @@ public class Film {
                 Film film = new Film(
                         resultSet.getString("titre"),
                         resultSet.getInt("id"),
-                        resultSet.getInt("id_real")
+                        resultSet.getInt("id_rea")
                 );
                 films.add(film);
             }
