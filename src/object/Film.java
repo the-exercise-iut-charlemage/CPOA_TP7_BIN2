@@ -69,7 +69,7 @@ public class Film {
         try {
             Connection connection = DBConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement(
-                    "select * from film where id_real = ?"
+                    "select * from film where id_rea = ?"
             );
             statement.setInt(1, p.getId());
             ResultSet resultSet = statement.executeQuery();
@@ -102,7 +102,7 @@ public class Film {
     private void update() throws SQLException {
         Connection connection = DBConnection.getConnection();
         PreparedStatement statement = connection.prepareStatement(
-                "update film set id_real = ?, titre = ? " +
+                "update film set id_rea = ?, titre = ? " +
                         "where id = ?"
         );
         statement.setInt(1, this.id_real);
@@ -120,7 +120,7 @@ public class Film {
         while (idSet.next())
             this.id = idSet.getInt("idMax") + 1;
         PreparedStatement statement = connection.prepareStatement(
-                "insert into film(id, titre, id_real) values(?, ?, ?)"
+                "insert into film(id, titre, id_rea) values(?, ?, ?)"
         );
         statement.setInt(1, this.id);
         statement.setString(2, this.titre);
@@ -130,11 +130,13 @@ public class Film {
 
     public static void createTable() throws SQLException {
         Connection connection = DBConnection.getConnection();
-        PreparedStatement st = connection.prepareStatement("CREATE TABLE `film` (\n" +
-                "  `ID` int(11) NOT NULL,\n" +
-                "  `TITRE` varchar(40) NOT NULL,\n" +
-                "  `ID_REAL` int(11) DEFAULT NULL\n" +
+        PreparedStatement st = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `film` (" +
+                "  `ID` int(11) NOT NULL," +
+                "  `TITRE` varchar(40) NOT NULL," +
+                "  `ID_REA` int(11) DEFAULT NULL" +
                 ")");
+        st.executeUpdate();
+        st = connection.prepareStatement("ALTER TABLE `film` ADD CONSTRAINT FOREIGN KEY (`ID_REA`) REFERENCES `personne` (`ID`)");
         st.executeUpdate();
     }
 
