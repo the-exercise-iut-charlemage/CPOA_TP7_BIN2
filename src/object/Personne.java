@@ -164,9 +164,9 @@ public class Personne {
         DBConnection.setNomDB("testpersone");
         Connection connection = DBConnection.getConnection();
         PreparedStatement st = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `personne` (" +
-                "`ID` int(11) NOT NULL," +
+                "`ID` int(11) primary key NOT NULL," +
                 "`NOM` varchar(40) NOT NULL," +
-                "`PRENOM` varchar(40) NOT NULL)");
+                "`PRENOM` varchar(40) NOT NULL) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5");
         st.executeUpdate();
     }
 

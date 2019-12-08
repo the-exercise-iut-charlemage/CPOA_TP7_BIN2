@@ -131,12 +131,12 @@ public class Film {
     public static void createTable() throws SQLException {
         Connection connection = DBConnection.getConnection();
         PreparedStatement st = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `film` (" +
-                "  `ID` int(11) NOT NULL," +
+                "  `ID` int(11) primary key NOT NULL," +
                 "  `TITRE` varchar(40) NOT NULL," +
                 "  `ID_REA` int(11) DEFAULT NULL" +
-                ")");
+                ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;");
         st.executeUpdate();
-        st = connection.prepareStatement("ALTER TABLE `film` ADD CONSTRAINT FOREIGN KEY (`ID_REA`) REFERENCES `personne` (`ID`)");
+        st = connection.prepareStatement("ALTER TABLE `film` ADD CONSTRAINT `film_ibfk_1` FOREIGN KEY (`ID_REA`) REFERENCES `personne` (`ID`)");
         st.executeUpdate();
     }
 
