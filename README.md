@@ -1,4 +1,4 @@
-## TP ActiveRecord CPOA
+## TP ActiveRecord CPOA Groupe S3B
 
 #### Réalisé par Lucas Burté (lucasburte) et Pierre Marcolet (AlasDiablo)
 
